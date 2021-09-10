@@ -5,50 +5,10 @@ const path = require('path');
 const DB_USER='postgres';
 const DB_PASSWORD='sebapinchacapo';
 const DB_HOST='localhost';
-// const {DB_USER, DB_PASSWORD, DB_HOST, DB_NAME} = process.env;
-// let sequelize = 
-//   process.env.NODE_ENV === 'production'
-//   ?  new Sequelize ({
-//     databse: DB_NAME,
-//     dialect: 'postgres',
-//     host: DB_HOST,
-//     port: 5432,
-//     username: DB_USER,
-//     password: DB_PASSWORD,
-//     pool: {
-//     max: 3,
-//     min: 1,
-//     idle: 10000
-//     },
-//     dialectOptions: {
-//       ssl: {
-//         require: true,
-//         rejectUnauthorized: false,
-//       },
-//       keepAlive: true,
-//     },
-//     ssl: true,
-//   })
-//   : new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pokemon`, {logging:false, native:false});
-// console.log(process.env)
-// let sequelize = new Sequelize(process.env.DATABASE_URL, {
-//   dialect: "postgres",
-//   pool: {
-//     max: 3,
-//     min: 1,
-//     idle: 10000,
-//   },
-//   dialectOptions: {
-//     ssl: {
-//       require: true,
-//       rejectUnauthorized: false,
-//     },
-//     keepAlive: true,
-//   },
-//   ssl: true,
-// });
+const { DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/bounsel`, {
+
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/soamee`, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -81,11 +41,57 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User } = sequelize.models;
 
+const Author = sequelize.define('author', {
+  first_name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  last_name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+});
+
+const Book = sequelize.define('book', {
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  isbn: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+});
+
+
+Author.hasMany(Book);
+Book.belongsTo(Author);
+
+// sequelize.sync({ force: false }).then(async() => {
+//  const author = await Author.create({
+//    first_name:'sacha',
+//    last_name:'sachu'
+//  })
+//  .catch((err)=> {
+//   console.log(err);
+// });
+
+//  const book = await Book.create({
+//    name:'narnia',
+//    isbn:2
+//  })
+ 
+//  await book.setAuthor(author)
+
+//  .catch((err)=> {
+//    console.log(err);
+//  });
+
+// });
 
 
 module.exports = {
-  ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
+  Book, Author, // para poder importar los modelos así: const { Product, User } = require('./db.js');
   conn: sequelize,     // para importart la conexión { conn } = require('./db.js');
 };

@@ -1,21 +1,26 @@
 import React, {useEffect} from 'react'
-import {Login} from './Login'
-import {SignUp} from './SignUp'
 import styles from './landing.module.scss'
-import { useDispatch } from "react-redux";
-import {LogOut} from '../../Redux/Actions'
+import { useDispatch, useSelector } from 'react-redux'
+import {allBooks} from '../../Redux/Actions'
+import {Link} from 'react-router-dom'
 
 
 export function Landing(){
-const dispatch = useDispatch()
-
-const user = window.localStorage.getItem('key')
-user && JSON.parse(user)
+const dispatch = useDispatch();
+useEffect(() =>  dispatch(allBooks()), [])
+const books = useSelector((state) => state.Books);
     return (
         <div className={styles.container}>
-         <SignUp></SignUp>
-        <Login></Login>
-        <button className={styles.simpleButton} style={{position:'relative', top:'100px'}} onClick={() => user && dispatch(LogOut())}>Log Out</button>
+         
+         {
+            books && books.map((item) => (
+                <div> 
+                    <h1 className={styles.name}>
+                        <Link className={styles.link} to={`/book/${item.id}`}>{item.name.toUpperCase()}</Link>
+                    </h1>
+                </div>
+            ))
+         }
         </div>
     )
 }

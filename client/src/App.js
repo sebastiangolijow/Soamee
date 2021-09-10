@@ -1,20 +1,29 @@
 import logo from './logo.svg';
 import './App.css';
 import { Route} from "react-router-dom";
-import {Nav} from './Components/Nav/Nav'
-import {Home} from './Components/Home/Home'
-import {About} from './Components/About/About'
-import {Carrito} from './Components/Carrito/Carrito'
-import {Landing} from './Components/Landing/Landing'
+import {Landing} from './Components/Landing/Landing';
+import {About} from './Components/Landing/About';
+import {Nav} from './Components/Nav';
+import {CreateA} from './Components/CreateA';
+import {CreateB} from './Components/CreateB';
+import{ Autores} from './Components/Authors'
+
+
+
+
 function App() {
   return (
     <div className="App">
     <Route path='/' component={Nav}/>
-    Buy online with the help of Specialists and enjoy free shipping without physical contact.
-   <Route exact path='/home' component={Home}/>
-    <Route exact path='/home/:id' render={({match}) => <About id={match.params.id}/>}/>
-    <Route path='/carrito' component={Carrito} />
     <Route exact path='/' component={Landing}/>
+    <Route exact path='/CreateA' component={CreateA}/>
+    <Route exact path='/CreateB' component={CreateB}/>
+    <Route exact path='/Authors' component={Autores}/>
+
+
+
+    <Route exact path='/book/:id' render={({match}) => <About id={match.params.id}/>}/>
+
     </div>
   );
 }
