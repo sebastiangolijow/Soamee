@@ -1,27 +1,16 @@
 import { Link } from 'react-router-dom';
-var {expect } = require('chai')
+var {expect } = require('chai');
 import {Landing} from './Components/Landing/Landing'
 import { configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {Nav} from './Components/Nav' 
+import {Nav} from './Components/Nav';
+
 configure({adapter: new Adapter()});
-
-describe(Landing, () => {
-  let wrapper = shallow(<Landing/>)
-  it('it should be a function', () => {
-      expect(Landing).to.be.a('function')
-    });
-    it('Renderiza un <Link>', () => {
-      expect(wrapper.find('Link'))
-    })
-});
-
-
   
 describe(Nav, () => {
   let wrapper = shallow(<Nav/>)
   it('it should be a function', () => {
-      expect(Home).to.be.a('function')
+      expect(Nav).to.be.a('function')
     });
     it('Deberia renderizar  <Link />', () => {
       expect(wrapper.find(Link)).to.have.length(4);
