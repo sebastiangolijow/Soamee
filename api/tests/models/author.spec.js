@@ -1,20 +1,17 @@
 const { expect } = require('chai');
+const {Author, Book } = require("../../src/db");
 
 describe('Author model', () => {
-  before(() => conn.authenticate()
-    .catch((err) => {
-      console.error('Unable to connect to the database:', err);
-    }));
   describe('Validators', () => {
-    beforeEach(() => User.sync({ force: true }));
-    describe('name', () => {
-      it('should throw an error if name is null', (done) => {
-        User.create({})
+    beforeEach(() => Author.sync({ force: true }));
+    describe('first_name', () => {
+      it('should throw an error if first_name is null', (done) => {
+        Author.create({})
           .then(() => done(new Error('It requires a valid name')))
           .catch(() => done());
       });
       it('should work when its a valid name', () => {
-        User.create({ name: 'Sebastian' });
+        Author.create({ first_name: 'Sebastian', last_name:'Golijow' });
       });
     });
   });
