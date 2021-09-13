@@ -13,6 +13,24 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
 
+let sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: "postgres",
+  pool: {
+    max: 3,
+    min: 1,
+    idle: 10000,
+  },
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+    keepAlive: true,
+  },
+  ssl: true,
+});
+
+
 sequelize.authenticate()
     .then(() => {
     console.log('running');
