@@ -13,6 +13,24 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
 
+// let sequelize = new Sequelize(process.env.DATABASE_URL, {
+//   dialect: "postgres",
+//   pool: {
+//     max: 3,
+//     min: 1,
+//     idle: 10000,
+//   },
+//   dialectOptions: {
+//     ssl: {
+//       require: true,
+//       rejectUnauthorized: false,
+//     },
+//     keepAlive: true,
+//   },
+//   ssl: true,
+// });
+
+
 sequelize.authenticate()
     .then(() => {
     console.log('running');
@@ -67,29 +85,6 @@ const Book = sequelize.define('book', {
 
 Author.hasMany(Book);
 Book.belongsTo(Author);
-
-// sequelize.sync({ force: false }).then(async() => {
-//  const author = await Author.create({
-//    first_name:'sacha',
-//    last_name:'sachu'
-//  })
-//  .catch((err)=> {
-//   console.log(err);
-// });
-
-//  const book = await Book.create({
-//    name:'narnia',
-//    isbn:2
-//  })
- 
-//  await book.setAuthor(author)
-
-//  .catch((err)=> {
-//    console.log(err);
-//  });
-
-// });
-
 
 module.exports = {
   Book, Author, // para poder importar los modelos así: const { Product, User } = require('./db.js');
