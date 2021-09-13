@@ -61,3 +61,17 @@ export function AuthorsAction(){
       }).catch((err)=>console.log(err))
   };
 }
+
+
+export function ModB({name, isbn, authorId, id}){
+  console.log('aca')
+  console.log(id, isbn, name, authorId)
+  return function (dispatch){
+      axios.put(`http://localhost:3001/books/${id}`, {name, isbn, authorId})
+          .then(res =>
+              dispatch({
+                  type: 'Mod_B',
+                  payload: true
+              }),
+          ).catch(e => alert("Errors dates"))
+}};

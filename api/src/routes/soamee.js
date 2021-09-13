@@ -73,4 +73,21 @@ router.post("/book", async (req, res) => {
   }
 });
 
+
+router.put('/books/:id', async function (req, res) {
+  let {id} = req.params;
+  let {name, isbn, authorId} = req.body;
+  try { 
+    const book = await Book.update(
+    {name, isbn, authorId },
+    {where: {id} }
+  );
+  res.json(book)
+  console.log(name, isbn, authorId)
+ } catch(err) {
+   console.log(err)
+ }
+});
+
+
 module.exports = router;

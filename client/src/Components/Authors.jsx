@@ -13,7 +13,7 @@ const Authors = useSelector((state) => state.Authors);
          
          {
             Authors && Authors.map((item) => (
-                <div> 
+                <div className={styles.card}> 
                     <h1 className={styles.name}>
                     Nombre:    {item.first_name.toUpperCase()}
                     </h1>

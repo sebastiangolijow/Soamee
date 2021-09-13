@@ -7,7 +7,7 @@ import {Nav} from './Components/Nav';
 import {CreateA} from './Components/CreateA';
 import {CreateB} from './Components/CreateB';
 import{ Autores} from './Components/Authors'
-
+import {ModBook} from './Components/ModBook'
 
 
 
@@ -19,9 +19,7 @@ function App() {
     <Route exact path='/CreateA' component={CreateA}/>
     <Route exact path='/CreateB' component={CreateB}/>
     <Route exact path='/Authors' component={Autores}/>
-
-
-
+    <Route exact path='/ModB/:id'render={({match}) => <ModBook id={match.params.id}/>}/>
     <Route exact path='/book/:id' render={({match}) => <About id={match.params.id}/>}/>
 
     </div>

@@ -72,7 +72,7 @@ alert('Libro creado');
                 value={Input.authorId} 
                 placeholder='Autor ID'
             />
-            <button style={styleButton} onClick={(e) => handlesubmit(e)}>Crear Book</button>
+            <button style={styleButton} onClick={(e) => handlesubmit(e)}>Crear Libro</button>
 
         </div>
         </form>

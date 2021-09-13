@@ -14,7 +14,7 @@ const books = useSelector((state) => state.Books);
          
          {
             books && books.map((item) => (
-                <div> 
+                <div className={styles.cardB}> 
                     <h1 className={styles.name}>
                         <Link className={styles.link} to={`/book/${item.id}`}>{item.name.toUpperCase()}</Link>
                     </h1>

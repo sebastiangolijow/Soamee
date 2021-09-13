@@ -62,7 +62,7 @@ alert('Author creado');
                 value={Input.lastName} 
                 placeholder='Apellido'
             />
-            <button style={styleButton} onClick={(e) => handlesubmit(e)}>Crear Author</button>
+            <button style={styleButton} onClick={(e) => handlesubmit(e)}>Crear Autor</button>
         </div>
         </form>
     )
