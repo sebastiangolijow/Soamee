@@ -12,7 +12,9 @@ Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser. 
 Open [http://localhost:3001](http://localhost:3001) to view the JSON responses. 
 
-Run npm test in client to run the tests in the front, and in api to run the tests in back and in the database model.
+
+### `npm test`
+in the client folder to run the tests in the front, and in the api folder to run the tests in back and in the database model.
 
 
 
